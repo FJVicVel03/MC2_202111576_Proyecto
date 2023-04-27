@@ -1,5 +1,8 @@
+import tkinter as tk
+from tkinter import simpledialog
 import networkx as nx
 import matplotlib.pyplot as plt
+
 
 class Graph:
     def __init__(self, vertices):
@@ -57,32 +60,34 @@ class Graph:
                 self.MST.append([s,d,w])
                 self.union(x,y)
         self.printSolution(s,d,w)
-        
 
 # Pedimos la cantidad de nodos y aristas
-n = int(input("Ingresa la cantidad de nodos: "))
+n = simpledialog.askinteger(title="Ventana de Nodos", prompt="Ingrese la cantidad de Nodos:")
 g = Graph(n)
+
+root = tk.Tk()
+root.withdraw()
 
 # Pedimos los nombres de los nodos
 for i in range(n):
-    node = input("Ingresa el nombre del nodo " + str(i+1) + ": ")
+    node = simpledialog.askstring(title="Ventana de Nombre de Nodo", prompt="Ingresa el nombre del nodo: " + str(i+1) + ": ")
     g.addNode(node)
 
 # Pedimos las aristas
-e = int(input("Ingresa la cantidad de aristas: "))
+e = simpledialog.askinteger(title="Ventana de Aristas", prompt="Ingresa la cantidad de aristas: ")
 for i in range(e):
     print("Arista " + str(i+1))
-    s = input("Ingresa el nombre del nodo de origen: ")
-    d = input("Ingresa el nombre del nodo de destino: ")
-    w = int(input("Ingresa el peso de la arista: "))
+    s = simpledialog.askstring(title="Nodo Origen",prompt="Ingresa el nombre del nodo de origen: ")
+    d = simpledialog.askstring(title ="Nodo Destino",prompt="Ingresa el nombre del nodo de destino: ")
+    w = simpledialog.askinteger(title = "Peso Arista",prompt="Ingresa el peso de la arista: ")
     g.addEdge(s,d,w)
 
 g.kruskalAlgo()
 
-#Creamos un grafo vacío
+# Creamos un grafo vacío
 G = nx.Graph()
 
-#Agregamos los nodos
+# Agregamos los nodos
 for node in g.nodes:
     G.add_node(node)
 
